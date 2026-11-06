@@ -40,3 +40,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# video production scratch
+audio_tracks/
+recordings/
+temp_video_test/
+*.ps1
+partA*
+partB*
+concat_final.txt
+test_out.mp4
+test_voice.wav
+test_audio.mp3
+make_tts.py
+generate_audio_suite.py
+record_and_produce_video.py

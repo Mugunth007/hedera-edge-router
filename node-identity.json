@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-06T10:06:44.715Z",
-  "publicKey": "03e958617e297fa81b0b25acc3d3dfbabe6fc96717f971d355edd95b1acc5b1ed8",
-  "evmAddress": "0x1c77fa33624220061c6a694fbfad423afb3869b2",
+  "generatedAt": "2026-11-06T17:17:20.503Z",
+  "publicKey": "0244a50b233f6debf358f0c6a877c89cd56962d5c07356fe23f0b5ef060d46a2cf",
+  "evmAddress": "0xe6c92975d6b55b3885337f9664327d1eb01d11e1",
   "enclaveModel": "Apple Neural Engine / ARM TrustZone TEE",
   "instructions": "Fund this address on Hedera Testnet or link to an existing Account ID via the operator dashboard.",
-  "privateKey": "a5e04fb301acd2dbc79d583275bbaf421385f48277b7ae017df0e0bb484de02e"
+  "privateKey": "bd3d3710e271e6587f08a5d57a0c609571dc05b4f60a4ca1efd472e59e814fd5"
 }

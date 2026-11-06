@@ -56,7 +56,13 @@ export default function Home() {
             <button onClick={handleOpenDashboard} className="hover:text-white transition-colors">
               Node Telemetry
             </button>
-            <Link href="/mobile" className="hover:text-emerald-300 text-emerald-400 font-semibold transition-colors flex items-center gap-1">
+            <a href="/deck.html" target="_blank" className="hover:text-emerald-400 text-emerald-300 font-medium transition-colors flex items-center gap-1">
+              Pitch Deck
+            </a>
+            <a href="/video-preview.html" target="_blank" className="hover:text-cyan-400 text-cyan-300 font-medium transition-colors flex items-center gap-1">
+              Demo Video
+            </a>
+            <Link href="/mobile" className="hover:text-emerald-300 text-neutral-400 font-semibold transition-colors flex items-center gap-1">
               <Smartphone className="w-3.5 h-3.5" /> Mobile Miner
             </Link>
             <button onClick={handleLaunchAgent} className="hover:text-white transition-colors">

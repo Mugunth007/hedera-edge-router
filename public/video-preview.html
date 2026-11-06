@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HederaEdge — 4-Minute Technical Demo Video Screening Room</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background-color: #030303;
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .bg-grid-mask {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 35%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 35%, transparent 85%);
+    }
+  </style>
+</head>
+<body class="relative flex flex-col justify-between p-6 sm:p-10 select-none">
+  
+  <div class="fixed inset-0 bg-grid-mask pointer-events-none z-0"></div>
+
+  <!-- Header -->
+  <header class="relative z-10 max-w-5xl w-full mx-auto flex items-center justify-between pb-6 border-b border-white/[0.08]">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-mono font-bold text-emerald-400 text-sm">
+        HE
+      </div>
+      <div>
+        <h1 class="text-base font-bold text-white tracking-tight">Hedera<span class="text-neutral-400 font-normal">Edge</span> Demo Screening Room</h1>
+        <p class="text-xs text-neutral-400 font-mono">ETHGlobal Submission Video (4:15 Master Cut • 1080p 30fps)</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="hederaedge-demo-video.mp4" download="HederaEdge-ETHGlobal-Demo.mp4" class="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-mono font-bold text-xs flex items-center gap-1.5 shadow-lg transition-colors">
+        <span>Download MP4</span>
+        <span>↓</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Video Main Stage -->
+  <main class="relative z-10 max-w-5xl w-full mx-auto my-6 space-y-5">
+    
+    <!-- Player Container -->
+    <div class="relative rounded-2xl overflow-hidden border border-white/[0.12] bg-black shadow-2xl group">
+      <video id="demo-video" class="w-full aspect-video object-contain bg-black" controls preload="metadata" poster="test_slide1.png">
+        <source src="hederaedge-demo-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Chapter Scrubbers & Timeline Navigation -->
+    <div class="p-4 rounded-xl bg-[#0a0a0a] border border-white/[0.08] space-y-3 font-mono text-xs">
+      <div class="flex items-center justify-between text-neutral-400">
+        <span class="font-bold text-white uppercase tracking-wider text-[11px]">Quick Chapter Jumps:</span>
+        <span>Total Duration: ~4:15</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <button onclick="seekTo(0)" class="p-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-left transition-colors">
+          <div class="text-emerald-400 font-bold">0:00 Pitch Deck</div>
+          <div class="text-neutral-400 text-[10px]">Slides 1–6 (Hero & Vision)</div>
+        </button>
+
+        <button onclick="seekTo(136)" class="p-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-left transition-colors">
+          <div class="text-cyan-400 font-bold">2:16 Live Setup</div>
+          <div class="text-neutral-400 text-[10px]">CLI Node Daemon & HUD</div>
+        </button>
+
+        <button onclick="seekTo(163)" class="p-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-left transition-colors">
+          <div class="text-purple-400 font-bold">2:43 x402 Execution</div>
+          <div class="text-neutral-400 text-[10px]">Aha! Moment (0 Egress)</div>
+        </button>
+
+        <button onclick="seekTo(203)" class="p-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-left transition-colors">
+          <div class="text-amber-400 font-bold">3:23 Verification</div>
+          <div class="text-neutral-400 text-[10px]">HashScan & 38/38 Tests</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Links Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+      <a href="index.html" class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-emerald-500/50 transition-colors flex items-center justify-between">
+        <div>
+          <div class="text-white font-bold">Interactive Pitch Deck</div>
+          <div class="text-neutral-400 text-[11px]">Run index.html in browser</div>
+        </div>
+        <span class="text-emerald-400">↗</span>
+      </a>
+
+      <a href="demo-live.html" class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-cyan-500/50 transition-colors flex items-center justify-between">
+        <div>
+          <div class="text-white font-bold">Live Demo Simulator</div>
+          <div class="text-neutral-400 text-[11px]">Run demo-live.html</div>
+        </div>
+        <span class="text-cyan-400">↗</span>
+      </a>
+
+      <a href="4-MINUTE-DEMO-RUNBOOK.md" class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-purple-500/50 transition-colors flex items-center justify-between">
+        <div>
+          <div class="text-white font-bold">Video Production Script</div>
+          <div class="text-neutral-400 text-[11px]">Read 4-MINUTE-DEMO-RUNBOOK</div>
+        </div>
+        <span class="text-purple-400">↗</span>
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="relative z-10 max-w-5xl w-full mx-auto pt-6 border-t border-white/[0.08] text-center text-xs font-mono text-neutral-500">
+    HederaEdge • ETHGlobal Mumbai 2026 Submission
+  </footer>
+
+  <script>
+    const video = document.getElementById('demo-video');
+    function seekTo(sec) {
+      video.currentTime = sec;
+      video.play();
+    }
+  </script>
+</body>
+</html>

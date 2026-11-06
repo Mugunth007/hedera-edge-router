@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HederaEdge — Enterprise DePIN AI & Verifiable Security Gateway | Interactive Pitch Deck</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#030303',
+            surface: '#080808',
+            elevated: '#0e0e0e',
+            subtle: '#151515',
+            cardBorder: 'rgba(255, 255, 255, 0.08)',
+            cardBorderHover: 'rgba(255, 255, 255, 0.18)',
+            hederaCyan: '#06b6d4',
+            hederaEmerald: '#10b981',
+            hederaViolet: '#8b5cf6',
+            hederaAmber: '#f59e0b',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          animation: {
+            'pulse-subtle': 'pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'radar-spin': 'radarSpin 8s linear infinite',
+          },
+          keyframes: {
+            pulseSubtle: {
+              '0%, 100%': { opacity: '0.9', transform: 'scale(1)' },
+              '50%': { opacity: '0.4', transform: 'scale(0.98)' },
+            },
+            radarSpin: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Global Base & Reset */
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #030303;
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Aceternity Background Grid Pattern with Radial Mask */
+    .bg-grid-mask {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000000 35%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000000 35%, transparent 85%);
+    }
+
+    /* Ambient Glow Spotlights */
+    .spotlight-top {
+      background: radial-gradient(circle 650px at 50% -10%, rgba(16, 185, 129, 0.12), transparent 70%);
+    }
+    .spotlight-bottom {
+      background: radial-gradient(circle 600px at 50% 110%, rgba(6, 182, 212, 0.08), transparent 70%);
+    }
+
+    /* Aceternity Moving Border Beam */
+    .moving-border-card {
+      position: relative;
+      background: #090909;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .moving-border-card::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(from 0deg, transparent 0%, transparent 65%, rgba(6, 182, 212, 0.5) 85%, rgba(16, 185, 129, 0.9) 95%, transparent 100%);
+      animation: rotate-beam 6s linear infinite;
+      z-index: 0;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .moving-border-card::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      background: #090909;
+      border-radius: calc(1rem - 1px);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .moving-border-card > * {
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes rotate-beam {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Spotlight Cursor Tracking on Cards */
+    .spotlight-card {
+      position: relative;
+      background-color: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .spotlight-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+        rgba(255, 255, 255, 0.07),
+        transparent 65%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+    .spotlight-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 3D Perspective Tilt Container */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+
+    /* Staggered Spring Reveal Engine */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 5rem 2rem 6.5rem 2rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+      z-index: 10;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    @media (min-height: 800px) {
+      .slide {
+        justify-content: center;
+        padding-top: 3rem;
+      }
+    }
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 20;
+    }
+
+    .slide .reveal-item {
+      opacity: 0;
+      transform: translateY(24px) scale(0.985);
+      filter: blur(8px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide.active .reveal-item {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+
+    /* Stagger Delays */
+    .slide.active .reveal-item:nth-child(1) { transition-delay: 0.05s; }
+    .slide.active .reveal-item:nth-child(2) { transition-delay: 0.12s; }
+    .slide.active .reveal-item:nth-child(3) { transition-delay: 0.20s; }
+    .slide.active .reveal-item:nth-child(4) { transition-delay: 0.28s; }
+    .slide.active .reveal-item:nth-child(5) { transition-delay: 0.36s; }
+    .slide.active .reveal-item:nth-child(6) { transition-delay: 0.44s; }
+
+    /* Custom Terminal Scrollbar */
+    .code-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .code-scroll::-webkit-scrollbar-track {
+      background: #090909;
+    }
+    .code-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+    .code-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Animated Diff Pulse */
+    @keyframes diffGreenPulse {
+      0%, 100% { background-color: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.3); }
+      50% { background-color: rgba(16, 185, 129, 0.22); border-color: rgba(16, 185, 129, 0.5); }
+    }
+    .diff-insert {
+      animation: diffGreenPulse 3s ease-in-out infinite;
+    }
+    .diff-delete {
+      background-color: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.3);
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    /* Animated Connector Pipeline Lines */
+    .pipeline-pulse {
+      stroke-dasharray: 6 12;
+      animation: dashMove 1.5s linear infinite;
+    }
+    @keyframes dashMove {
+      from { stroke-dashoffset: 36; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* Noise Texture Overlay */
+    .noise-layer {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-slate-100 flex flex-col justify-between select-none">
+
+  <!-- Background Layers -->
+  <div class="fixed inset-0 bg-grid-mask pointer-events-none z-0"></div>
+  <div class="fixed inset-0 spotlight-top pointer-events-none z-0"></div>
+  <div class="fixed inset-0 spotlight-bottom pointer-events-none z-0"></div>
+  <div class="fixed inset-0 noise-layer pointer-events-none z-0"></div>
+
+  <!-- Top Glassmorphic Navigation & Status Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-8 py-4 flex items-center justify-between border-b border-white/[0.06] bg-obsidian/75 backdrop-blur-xl">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.12] flex items-center justify-center font-mono font-bold text-white text-xs tracking-wider shadow-inner">
+        HE
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="font-bold text-base tracking-tight text-white font-sans">Hedera<span class="text-neutral-400 font-light">Edge</span></span>
+        <span class="hidden md:inline-block font-mono text-[11px] px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-neutral-400">
+          DePIN AI Security Gateway
+        </span>
+      </div>
+    </div>
+
+    <!-- Live Testnet Verification Badges -->
+    <div class="flex items-center gap-3 font-mono text-[11px]">
+      <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 -ml-3"></span>
+        <span>Hedera Testnet Live</span>
+      </div>
+      <div class="hidden lg:flex items-center gap-2 text-neutral-400 border border-white/[0.06] bg-white/[0.02] px-3 py-1 rounded-full">
+        <span>HCS: <span class="text-white">0.0.11335841</span></span>
+        <span class="text-neutral-600">•</span>
+        <span>$EDGE: <span class="text-white">0.0.11336302</span></span>
+        <span class="text-neutral-600">•</span>
+        <span>SLA: <span class="text-white">0.0.11337652</span></span>
+      </div>
+      <button id="audio-toggle" class="px-2.5 py-1 rounded-lg border border-white/[0.08] bg-white/[0.04] text-neutral-400 hover:text-white hover:border-white/[0.15] transition-all flex items-center gap-1.5" title="Toggle Synthesized Audio Feedback (M)">
+        <svg id="audio-icon-on" class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        </svg>
+        <span id="audio-text">SFX</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN PRESENTATION STAGE (6 SLIDES: 0:00 - 2:00)
+       ========================================== -->
+  <main id="presentation-viewport" class="relative w-full h-full flex items-center justify-center pt-16">
+
+    <!-- SLIDE 1: Hero & Vision (0:00 - 0:20) -->
+    <section class="slide active" id="slide-1" data-index="0" data-duration="20">
+      <div class="max-w-5xl w-full flex flex-col items-center text-center space-y-6">
+        
+        <!-- Glowing Top Pill Badge -->
+        <div class="reveal-item inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] text-xs font-mono tracking-wide text-neutral-300 shadow-xl">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span>ETHGlobal Mumbai • Hedera Agent & DePIN Track</span>
+          <span class="text-neutral-500">|</span>
+          <span class="text-emerald-400 font-semibold">100% Testnet Verified</span>
+        </div>
+
+        <!-- High-Contrast Gradient Title -->
+        <div class="reveal-item space-y-2">
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white">
+            Hedera<span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-white to-neutral-500">Edge</span>
+          </h1>
+          <p class="text-xl sm:text-2xl font-light text-neutral-400 tracking-tight max-w-3xl mx-auto">
+            Zero-Data-Egress AI Inference. Trustless Machine Micropayments.
+          </p>
+        </div>
+
+        <!-- Subtitle & Value Proposition -->
+        <p class="reveal-item text-neutral-400 text-sm sm:text-base max-w-2xl leading-relaxed font-sans">
+          Decentralized Physical Edge AI (DePIN) & Verifiable Security Gateway on Hedera. 
+          Inference runs locally on dedicated neural silicon with <strong class="text-white font-medium">zero cloud data leakage</strong>, 
+          settled autonomously via <strong class="text-emerald-400 font-medium">x402 micropayments</strong>, and notarized permanently on 
+          <strong class="text-cyan-400 font-medium">Hedera Consensus Service (HCS)</strong>.
+        </p>
+
+        <!-- Interactive Floating 3D Architecture Preview Card -->
+        <div class="reveal-item w-full max-w-3xl pt-2">
+          <div class="tilt-card moving-border-card p-6 shadow-2xl text-left cursor-pointer group">
+            <div class="flex items-center justify-between border-b border-white/[0.06] pb-3 mb-4">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-emerald-500/80 animate-ping"></div>
+                <span class="font-mono text-xs uppercase tracking-wider text-emerald-400 font-semibold">Live System Topology</span>
+              </div>
+              <span class="font-mono text-[11px] text-neutral-400">Node SLA: 99.98% • Mirror Synced</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Physical Edge Node -->
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1.5">
+                <div class="flex items-center justify-between text-xs text-neutral-400">
+                  <span class="font-medium text-white">Neural Silicon</span>
+                  <span class="text-emerald-400 font-mono text-[10px]">LOCAL NPU</span>
+                </div>
+                <div class="text-sm font-semibold text-white font-mono">Apple M-Series / Jetson</div>
+                <div class="text-[11px] text-neutral-400 font-mono">Qwen 3 1.7B • Zero Egress</div>
+              </div>
+
+              <!-- x402 Micropayments -->
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1.5">
+                <div class="flex items-center justify-between text-xs text-neutral-400">
+                  <span class="font-medium text-white">x402 Protocol</span>
+                  <span class="text-cyan-400 font-mono text-[10px]">SUB-SECOND</span>
+                </div>
+                <div class="text-sm font-semibold text-white font-mono">0.05 HBAR / Query</div>
+                <div class="text-[11px] text-neutral-400 font-mono">HTTP 402 Handshake</div>
+              </div>
+
+              <!-- HCS Consensus Notarization -->
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1.5">
+                <div class="flex items-center justify-between text-xs text-neutral-400">
+                  <span class="font-medium text-white">HCS-10 Consensus</span>
+                  <span class="text-purple-400 font-mono text-[10px]">TOPIC LIVE</span>
+                </div>
+                <div class="text-sm font-semibold text-white font-mono">Topic: 0.0.11335841</div>
+                <div class="text-[11px] text-neutral-400 font-mono">SHA-256 Audit Trail</div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-400">
+              <span class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>$EDGE Token ID: 0.0.11336302 (1,000,100 Supply)</span>
+              </span>
+              <span class="text-cyan-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                Explore Architecture <span>→</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Stat Strip -->
+        <div class="reveal-item flex flex-wrap items-center justify-center gap-6 pt-2 font-mono text-xs text-neutral-400">
+          <div><strong class="text-white text-base">0 Bytes</strong> Cloud Egress</div>
+          <span class="text-neutral-700">•</span>
+          <div><strong class="text-emerald-400 text-base">34.9 tok/s</strong> Local Throughput</div>
+          <span class="text-neutral-700">•</span>
+          <div><strong class="text-cyan-400 text-base">&lt;500ms</strong> x402 Settlement</div>
+          <span class="text-neutral-700">•</span>
+          <div><strong class="text-purple-400 text-base">38 / 38</strong> Tests Passing</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 2: The Core Bottleneck (0:20 - 0:40) -->
+    <section class="slide" id="slide-2" data-index="1" data-duration="20">
+      <div class="max-w-6xl w-full flex flex-col items-center space-y-6">
+        
+        <!-- Header -->
+        <div class="reveal-item text-center space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-mono">
+            <span>THE ARCHITECTURAL PARADOX</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            Why Centralized Cloud AI Fails Regulated Enterprise
+          </h2>
+          <p class="text-neutral-400 text-sm sm:text-base max-w-2xl mx-auto">
+            Streaming proprietary patient, financial, or contract data to centralized servers creates insurmountable regulatory, financial, and security barriers.
+          </p>
+        </div>
+
+        <!-- Split Screen Comparison Bento -->
+        <div class="reveal-item w-full grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+          
+          <!-- LEFT: Centralized Cloud APIs (Vulnerable) -->
+          <div class="spotlight-card p-6 bg-gradient-to-b from-red-950/20 via-neutral-950 to-neutral-950 border border-red-500/20">
+            <div class="flex items-center justify-between pb-4 border-b border-red-500/20 mb-4">
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 font-mono text-xs">
+                  ✕
+                </div>
+                <div>
+                  <h3 class="font-bold text-white text-base">Centralized Cloud AI</h3>
+                  <div class="font-mono text-[11px] text-red-400">OpenAI • AWS Bedrock • Anthropic</div>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-red-500/15 text-red-400 text-[11px] font-mono font-semibold">
+                CRITICAL RISK
+              </span>
+            </div>
+
+            <div class="space-y-4 font-sans text-sm">
+              <div class="p-3.5 rounded-xl bg-red-950/20 border border-red-500/15 space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-red-300">
+                  <span>DATA EXFILTRATION</span>
+                  <span class="text-red-400 font-bold">100% Cloud Exposure</span>
+                </div>
+                <p class="text-neutral-300 text-xs leading-relaxed">
+                  Raw prompts and patient records leave perimeter, violating <strong class="text-white">GDPR Art. 44 & HIPAA § 164.312</strong>.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <span>BLACK-BOX OPACITY</span>
+                  <span class="text-red-400 font-bold">Zero Attestation</span>
+                </div>
+                <p class="text-neutral-400 text-xs leading-relaxed">
+                  Zero cryptographic proof of model weights, execution authenticity, or quiet output censorship.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <span>MACHINE INCOMPATIBILITY</span>
+                  <span class="text-red-400 font-bold">$20k+/mo Credit Cards</span>
+                </div>
+                <p class="text-neutral-400 text-xs leading-relaxed">
+                  Autonomous agent swarms executing millions of micro-tasks cannot negotiate Web2 SaaS credit-card plans.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <span>CROSS-CHAIN BLINDNESS</span>
+                  <span class="text-red-400 font-bold">Centralized Oracle Risk</span>
+                </div>
+                <p class="text-neutral-400 text-xs leading-relaxed">
+                  Smart contracts on EVM chains cannot trigger verifiable AI without trusting fragile centralized oracles.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: HederaEdge DePIN Security (The Breakthrough) -->
+          <div class="moving-border-card p-6 bg-gradient-to-b from-emerald-950/20 via-neutral-950 to-neutral-950 border border-emerald-500/25">
+            <div class="flex items-center justify-between pb-4 border-b border-emerald-500/20 mb-4">
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono text-xs">
+                  ✓
+                </div>
+                <div>
+                  <h3 class="font-bold text-white text-base">HederaEdge DePIN Gateway</h3>
+                  <div class="font-mono text-[11px] text-emerald-400">Physical Silicon • Hedera Consensus</div>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[11px] font-mono font-semibold">
+                100% COMPLIANT
+              </span>
+            </div>
+
+            <div class="space-y-4 font-sans text-sm">
+              <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/20 space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-emerald-300">
+                  <span>ZERO CLOUD EGRESS</span>
+                  <span class="text-emerald-400 font-bold">0 Bytes Exfiltrated</span>
+                </div>
+                <p class="text-neutral-300 text-xs leading-relaxed">
+                  Inference executes inside local hardware SRAM (Apple Silicon / NPU). Prompts never touch the internet.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <span>CRYPTOGRAPHIC CONSENSUS</span>
+                  <span class="text-cyan-400 font-bold">HCS-10 Sequence Proofs</span>
+                </div>
+                <p class="text-neutral-300 text-xs leading-relaxed">
+                  Every inference generates an immutable SHA-256 state proof on Hedera Topic <strong class="text-white">0.0.11335841</strong>.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <span>x402 AUTONOMOUS MICROPAYMENT</span>
+                  <span class="text-emerald-400 font-bold">0.05 HBAR / Query</span>
+                </div>
+                <p class="text-neutral-300 text-xs leading-relaxed">
+                  Native <code class="text-emerald-300 font-mono">HTTP 402</code> negotiation for machine-to-machine streaming payments with zero human overhead.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400">
+                  <span>CROSS-CHAIN INTEROPERABILITY</span>
+                  <span class="text-purple-400 font-bold">Ethereum • Base • Arbitrum</span>
+                </div>
+                <p class="text-neutral-300 text-xs leading-relaxed">
+                  Verified Relayer Architecture allows any EVM smart contract to dispatch jobs verified against staked <strong class="text-white">$EDGE</strong> collateral.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 3: System Architecture (Bento Grid) (0:40 - 1:05) -->
+    <section class="slide" id="slide-3" data-index="2" data-duration="25">
+      <div class="max-w-6xl w-full flex flex-col items-center space-y-5">
+        
+        <!-- Header -->
+        <div class="reveal-item text-center space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono">
+            <span>DEPIN MESH ARCHITECTURE</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+            4-Layer Verifiable Compute Mesh
+          </h2>
+          <p class="text-neutral-400 text-xs sm:text-sm max-w-xl mx-auto">
+            From smart contract intent to physical neural silicon execution and immutable Hedera consensus notarization.
+          </p>
+        </div>
+
+        <!-- Aceternity 4-Card Bento Grid with Animated Connectors -->
+        <div class="reveal-item w-full relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
+          
+          <!-- CARD 1: Ingestion & x402 Micropayments -->
+          <div class="spotlight-card p-5 flex flex-col justify-between h-[340px] bg-neutral-950/80">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400 mb-4 font-mono font-bold text-sm">
+                01
+              </div>
+              <div class="font-mono text-[10px] text-cyan-400 tracking-wider uppercase mb-1">Layer 1: Ingestion</div>
+              <h3 class="text-base font-bold text-white mb-2">x402 Micropayment Protocol</h3>
+              <p class="text-xs text-neutral-400 leading-relaxed font-sans mb-4">
+                Autonomous agent issues inference request. Gateway returns standard <code class="text-neutral-200 bg-white/[0.06] px-1 py-0.5 rounded font-mono">HTTP 402 Payment Required</code> specifying 0.05 HBAR challenge.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/[0.06] space-y-2 font-mono text-[11px]">
+              <div class="flex justify-between text-neutral-400">
+                <span>Fee / Query:</span>
+                <span class="text-white font-semibold">0.05 HBAR</span>
+              </div>
+              <div class="flex justify-between text-neutral-400">
+                <span>Verification:</span>
+                <span class="text-emerald-400 font-semibold">&lt;500ms (Mirror Node)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: Cross-Chain Relayer -->
+          <div class="spotlight-card p-5 flex flex-col justify-between h-[340px] bg-neutral-950/80">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/25 flex items-center justify-center text-purple-400 mb-4 font-mono font-bold text-sm">
+                02
+              </div>
+              <div class="font-mono text-[10px] text-purple-400 tracking-wider uppercase mb-1">Layer 2: Interop</div>
+              <h3 class="text-base font-bold text-white mb-2">Cross-Chain EVM Relayer</h3>
+              <p class="text-xs text-neutral-400 leading-relaxed font-sans mb-4">
+                Listens to inbound bridge calls across Ethereum Sepolia, Base, and Arbitrum. Validates operator SLA bond against staked <strong class="text-white">$EDGE</strong> before dispatching.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/[0.06] space-y-2 font-mono text-[11px]">
+              <div class="flex justify-between text-neutral-400">
+                <span>Chains:</span>
+                <span class="text-white font-semibold">Sepolia, Base, Arb</span>
+              </div>
+              <div class="flex justify-between text-neutral-400">
+                <span>SLA Contract:</span>
+                <span class="text-purple-300 font-semibold">0.0.11337652</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3: Physical Edge Silicon (DePIN) -->
+          <div class="moving-border-card p-5 flex flex-col justify-between h-[340px] bg-neutral-950/80 border border-emerald-500/30">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 mb-4 font-mono font-bold text-sm">
+                03
+              </div>
+              <div class="font-mono text-[10px] text-emerald-400 tracking-wider uppercase mb-1">Layer 3: DePIN Silicon</div>
+              <h3 class="text-base font-bold text-white mb-2">Physical Edge Neural Nodes</h3>
+              <p class="text-xs text-neutral-400 leading-relaxed font-sans mb-4">
+                Executes locally on Apple Neural Engine, Snapdragon NPUs, or Jetson Orin via Ollama <strong class="text-emerald-300">Qwen 3 1.7B</strong>. Hardware TEE attestation; 0 bytes leave device.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/[0.06] space-y-2 font-mono text-[11px]">
+              <div class="flex justify-between text-neutral-400">
+                <span>Data Egress:</span>
+                <span class="text-emerald-400 font-bold">0 Bytes (Confidential)</span>
+              </div>
+              <div class="flex justify-between text-neutral-400">
+                <span>Throughput:</span>
+                <span class="text-white font-semibold">34.9 tok/s (Local NPU)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4: Consensus & Tokenization -->
+          <div class="spotlight-card p-5 flex flex-col justify-between h-[340px] bg-neutral-950/80">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 mb-4 font-mono font-bold text-sm">
+                04
+              </div>
+              <div class="font-mono text-[10px] text-amber-400 tracking-wider uppercase mb-1">Layer 4: Settlement</div>
+              <h3 class="text-base font-bold text-white mb-2">HCS Consensus & HTS Staking</h3>
+              <p class="text-xs text-neutral-400 leading-relaxed font-sans mb-4">
+                Inference state proof emitted to HCS Topic <strong class="text-white">0.0.11335841</strong>. Node operator earns native <strong class="text-amber-300">$EDGE</strong> tokens, verified by HENFT Hardware License.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-white/[0.06] space-y-2 font-mono text-[11px]">
+              <div class="flex justify-between text-neutral-400">
+                <span>Topic ID:</span>
+                <span class="text-cyan-400 font-semibold">0.0.11335841</span>
+              </div>
+              <div class="flex justify-between text-neutral-400">
+                <span>Node NFT:</span>
+                <span class="text-amber-400 font-semibold">HENFT #1 (0.0.11336303)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Animated Data-Flow Pipeline SVG -->
+        <div class="reveal-item w-full max-w-4xl py-1 hidden sm:block">
+          <div class="flex items-center justify-between text-[11px] font-mono text-neutral-400 px-6 py-2 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+            <span class="flex items-center gap-1.5 text-cyan-400">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              Prompt (Client)
+            </span>
+            <span class="text-neutral-600 font-bold">──[ x402 0.05 HBAR ]──➔</span>
+            <span class="text-purple-400">Gateway Relayer</span>
+            <span class="text-neutral-600 font-bold">──[ TEE Auth ]──➔</span>
+            <span class="text-emerald-400 font-bold">Local NPU (0 Egress)</span>
+            <span class="text-neutral-600 font-bold">──[ SHA-256 Proof ]──➔</span>
+            <span class="flex items-center gap-1.5 text-amber-400">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              Hedera HCS Topic
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Under the Hood (Editor-Style Code & CLI View) (1:05 - 1:30) -->
+    <section class="slide" id="slide-4" data-index="3" data-duration="25">
+      <div class="max-w-6xl w-full flex flex-col items-center space-y-4">
+        
+        <!-- Header -->
+        <div class="reveal-item text-center space-y-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+            <span>TECHNICAL CENTERPIECE</span>
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Under the Hood: IDE Diff & Streaming Telemetry
+          </h2>
+          <p class="text-neutral-400 text-xs sm:text-sm max-w-xl mx-auto">
+            1-line architectural diff replacing vulnerable cloud calls with zero-egress local NPU execution and immutable Hedera consensus proofs.
+          </p>
+        </div>
+
+        <!-- Simulated VS Code / Cursor IDE Window -->
+        <div class="reveal-item w-full bg-[#0a0a0a] rounded-2xl border border-white/[0.1] shadow-2xl overflow-hidden">
+          
+          <!-- macOS Traffic Light Header & Tabs -->
+          <div class="bg-[#111111] px-4 py-2.5 border-b border-white/[0.08] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
+              
+              <!-- Tab Pills -->
+              <div class="ml-4 flex items-center gap-1 font-mono text-xs">
+                <div class="px-3 py-1 rounded-md bg-[#1a1a1a] text-white border border-white/[0.08] flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span>edge-agent.js</span>
+                  <span class="text-[10px] text-neutral-500">M</span>
+                </div>
+                <div class="px-3 py-1 rounded-md text-neutral-400 hover:text-white transition-colors">
+                  <span>x402-verifier.ts</span>
+                </div>
+                <div class="px-3 py-1 rounded-md text-neutral-400 hover:text-white transition-colors">
+                  <span>NodeSLARegistry.sol</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 font-mono text-[11px] text-neutral-400">
+              <span class="text-emerald-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Port 8000 (Ollama NPU)</span>
+              </span>
+              <span>git: main*</span>
+            </div>
+          </div>
+
+          <!-- IDE Body: Split Screen Code Diff + Live Streaming Terminal -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[380px] font-mono text-xs">
+            
+            <!-- LEFT PANE (7 Cols): Code Diff Engine -->
+            <div class="lg:col-span-7 p-4 border-r border-white/[0.08] bg-[#0c0c0c] code-scroll overflow-y-auto space-y-1.5">
+              
+              <div class="text-neutral-500 pb-2 border-b border-white/[0.05] flex justify-between items-center text-[11px]">
+                <span>// Architecture Migration: Centralized Cloud ➔ HederaEdge DePIN</span>
+                <span class="text-emerald-400 font-semibold">+14 -5 diff</span>
+              </div>
+
+              <!-- Diff lines -->
+              <div class="diff-delete p-2 rounded text-red-300 font-mono text-[11px] space-y-0.5">
+                <div class="text-red-400 font-bold">// ❌ VULNERABLE: Centralized Cloud AI (Data Leaks to US Silo)</div>
+                <div>- const res = await openai.chat.completions.create({</div>
+                <div>-   model: "gpt-4o",</div>
+                <div>-   messages: [{ role: "user", content: confidentialPatientData }]</div>
+                <div>- }); // VIOLATES HIPAA & GDPR: Prompts leave corporate perimeter!</div>
+              </div>
+
+              <div class="diff-insert p-2 rounded text-emerald-300 font-mono text-[11px] space-y-0.5 mt-2">
+                <div class="text-emerald-400 font-bold">// ✅ HEDERAEDGE: Zero-Data-Egress Local Silicon + x402 Micropayment</div>
+                <div>+ const edgeGateway = new HederaEdgeGateway({</div>
+                <div>+   hcsTopicId: "0.0.11335841",    // Immutable consensus telemetry</div>
+                <div>+   nodeNftId:  "0.0.11336303",    // Hardware attestation license</div>
+                <div>+   slaContract:"0.0.11337652"     // Node staking & SLA bond</div>
+                <div>+ });</div>
+                <div>+</div>
+                <div>+ // Negotiate x402 micropayment & execute on physical neural silicon</div>
+                <div>+ const proof = await edgeGateway.dispatchInference({</div>
+                <div>+   prompt: confidentialPatientData,</div>
+                <div>+   x402FeeHbar: "0.05",           // Settles in &lt;500ms on Hedera</div>
+                <div>+   hardwareTarget: "local_npu",   // Apple Silicon / Snapdragon NPU</div>
+                <div>+   zeroCloudEgress: true          // 0 Bytes Leaves Physical Device!</div>
+                <div>+ });</div>
+                <div>+ console.log("HCS Sequence:", proof.hcsSequenceNumber); // Verified!</div>
+              </div>
+
+              <div class="pt-2 text-neutral-400 text-[11px] flex items-center justify-between border-t border-white/[0.05]">
+                <span>Status: <strong class="text-emerald-400 font-mono">200 OK • Zero-Egress Verified</strong></span>
+                <span>SHA-256 Digest: <code class="text-cyan-300">0x39a15c37...</code></span>
+              </div>
+            </div>
+
+            <!-- RIGHT PANE (5 Cols): Live Streaming Terminal & Telemetry -->
+            <div class="lg:col-span-5 p-4 bg-[#080808] flex flex-col justify-between space-y-3">
+              <div>
+                <div class="flex items-center justify-between pb-2 border-b border-white/[0.06] text-[11px] text-neutral-400">
+                  <span class="flex items-center gap-1.5 text-white font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span>Live Telemetry Stream</span>
+                  </span>
+                  <span id="terminal-latency" class="text-emerald-400 font-mono">482ms total</span>
+                </div>
+
+                <!-- Auto-Scrolling Log Box -->
+                <div id="terminal-log-container" class="mt-2 space-y-1.5 text-[11px] code-scroll max-h-[250px] overflow-y-auto font-mono">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <!-- Terminal Telemetry Mini Chart / Badges -->
+              <div class="pt-3 border-t border-white/[0.06] grid grid-cols-3 gap-2 text-center text-[10px]">
+                <div class="p-2 rounded bg-white/[0.02] border border-white/[0.06]">
+                  <div class="text-neutral-500">EGRESS BYTES</div>
+                  <div class="text-emerald-400 font-bold font-mono text-xs">0 BYTES</div>
+                </div>
+                <div class="p-2 rounded bg-white/[0.02] border border-white/[0.06]">
+                  <div class="text-neutral-500">THROUGHPUT</div>
+                  <div class="text-white font-bold font-mono text-xs">38.4 tok/s</div>
+                </div>
+                <div class="p-2 rounded bg-white/[0.02] border border-white/[0.06]">
+                  <div class="text-neutral-500">x402 COST</div>
+                  <div class="text-cyan-400 font-bold font-mono text-xs">0.05 HBAR</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 5: Benchmarks & Empirical Performance (1:30 - 1:50) -->
+    <section class="slide" id="slide-5" data-index="4" data-duration="20">
+      <div class="max-w-6xl w-full flex flex-col items-center space-y-5">
+        
+        <!-- Header -->
+        <div class="reveal-item text-center space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-mono">
+            <span>EMPIRICAL BENCHMARK SUITE</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            Audited Performance on Local Neural Silicon
+          </h2>
+          <p class="text-neutral-400 text-xs sm:text-sm max-w-xl mx-auto">
+            10 automated enterprise tests across Healthcare HIPAA, Fintech AML, and Smart Contracts using Ollama <code class="text-white font-mono">qwen3-1.7b</code>.
+          </p>
+        </div>
+
+        <!-- 4 Top Number Tickers -->
+        <div class="reveal-item w-full grid grid-cols-2 md:grid-cols-4 gap-4 pt-1">
+          <div class="spotlight-card p-4 text-center bg-white/[0.02]">
+            <div class="font-mono text-xs text-neutral-400 mb-1">Cloud Data Egress</div>
+            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-emerald-400 counter-target" data-value="0" data-suffix=" Bytes">0 Bytes</div>
+            <div class="text-[11px] text-emerald-500/80 mt-1 font-mono">100% Confidential</div>
+          </div>
+          <div class="spotlight-card p-4 text-center bg-white/[0.02]">
+            <div class="font-mono text-xs text-neutral-400 mb-1">Average Throughput</div>
+            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-white counter-target" data-value="34.9" data-suffix=" tok/s">34.9 tok/s</div>
+            <div class="text-[11px] text-neutral-400 mt-1 font-mono">Peak: 47.6 tok/s (NPU)</div>
+          </div>
+          <div class="spotlight-card p-4 text-center bg-white/[0.02]">
+            <div class="font-mono text-xs text-neutral-400 mb-1">x402 Micropayment</div>
+            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-cyan-400 counter-target" data-value="420" data-suffix=" ms">420 ms</div>
+            <div class="text-[11px] text-cyan-500/80 mt-1 font-mono">Mirror Fast-Path</div>
+          </div>
+          <div class="spotlight-card p-4 text-center bg-white/[0.02]">
+            <div class="font-mono text-xs text-neutral-400 mb-1">Test Assertions Passed</div>
+            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-purple-400 counter-target" data-value="38" data-suffix=" / 38">38 / 38</div>
+            <div class="text-[11px] text-purple-400 mt-1 font-mono">10 / 10 Suites (0 Failed)</div>
+          </div>
+        </div>
+
+        <!-- Comparative Progress Bar Benchmarks -->
+        <div class="reveal-item w-full bg-neutral-950 p-5 rounded-2xl border border-white/[0.08] space-y-4">
+          
+          <!-- Metric 1: Cloud Egress (0 vs 1420 KB) -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-mono">
+              <span class="text-white font-medium">Confidential Data Exfiltrated Outside Enterprise</span>
+              <span class="text-emerald-400 font-bold">HederaEdge: 0 Bytes | Cloud APIs: 1,420 KB</span>
+            </div>
+            <div class="w-full h-3 bg-neutral-900 rounded-full overflow-hidden flex">
+              <div class="h-full bg-emerald-500 transition-all duration-1000 ease-out" style="width: 2%;"></div>
+              <div class="h-full bg-red-500/80 transition-all duration-1000 ease-out" style="width: 98%;"></div>
+            </div>
+            <div class="flex justify-between text-[10px] text-neutral-400 font-mono">
+              <span>✓ 100% Zero-Egress Silicon Boundary</span>
+              <span class="text-red-400">❌ Centralized API Exfiltration</span>
+            </div>
+          </div>
+
+          <!-- Metric 2: Cost Per 1,000 Inferences -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-mono">
+              <span class="text-white font-medium">Autonomous Swarm Compute Cost (1,000 Queries)</span>
+              <span class="text-cyan-400 font-bold">HederaEdge: ~$0.20 (HBAR) | Cloud SaaS: $20.00+</span>
+            </div>
+            <div class="w-full h-3 bg-neutral-900 rounded-full overflow-hidden flex">
+              <div class="h-full bg-cyan-500 transition-all duration-1000 ease-out" style="width: 4%;"></div>
+              <div class="h-full bg-neutral-700 transition-all duration-1000 ease-out" style="width: 96%;"></div>
+            </div>
+            <div class="flex justify-between text-[10px] text-neutral-400 font-mono">
+              <span>✓ Pay-per-query machine micropayments</span>
+              <span>Proprietary monthly recurring invoice</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3 Empirical Domain Benchmark Cards from benchmark-results.json -->
+        <div class="reveal-item w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1 font-mono text-xs">
+            <div class="text-emerald-400 font-semibold text-[11px]">01. Healthcare / HIPAA</div>
+            <div class="text-white font-sans text-xs">ICD-10 Diagnostic Extraction</div>
+            <div class="text-neutral-400 text-[10px]">Egress: <strong class="text-emerald-400">0 B</strong> • Latency: 1,913ms • 28.8 tok/s</div>
+            <div class="text-neutral-500 text-[9px] truncate">SHA: 0x0c6226010e731f99...</div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1 font-mono text-xs">
+            <div class="text-cyan-400 font-semibold text-[11px]">02. Financial / Fintech</div>
+            <div class="text-white font-sans text-xs">AML Micro-Transfer Structuring</div>
+            <div class="text-neutral-400 text-[10px]">Egress: <strong class="text-emerald-400">0 B</strong> • Latency: 1,818ms • 39.6 tok/s</div>
+            <div class="text-neutral-500 text-[9px] truncate">SHA: 0x1793a12ce9e9a1a1...</div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1 font-mono text-xs">
+            <div class="text-purple-400 font-semibold text-[11px]">03. Smart Contract Audit</div>
+            <div class="text-white font-sans text-xs">Reentrancy & Flash-Loan Scan</div>
+            <div class="text-neutral-400 text-[10px]">Egress: <strong class="text-emerald-400">0 B</strong> • Latency: 1,703ms • 47.6 tok/s</div>
+            <div class="text-neutral-500 text-[9px] truncate">SHA: 0x9ce9fcf3d0ebb6f8...</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Transition to Live Demo (1:50 - 2:00) -->
+    <section class="slide" id="slide-6" data-index="5" data-duration="10">
+      <div class="max-w-4xl w-full flex flex-col items-center text-center space-y-6">
+        
+        <!-- Animated Radar Launch Icon -->
+        <div class="reveal-item relative flex items-center justify-center">
+          <div class="w-24 h-24 rounded-full border border-emerald-500/25 flex items-center justify-center relative">
+            <div class="absolute inset-0 rounded-full border border-emerald-400/40 animate-ping"></div>
+            <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+              <svg class="w-8 h-8 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="reveal-item space-y-2">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>SYSTEMS ARMED & READY</span>
+          </div>
+          <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
+            Transitioning to Live Technical Demo
+          </h2>
+          <p class="text-neutral-400 text-sm sm:text-base max-w-xl mx-auto">
+            Experience real zero-egress inference, autonomous x402 payment challenges, and instant Hedera HCS verification in real-time.
+          </p>
+        </div>
+
+        <!-- Pre-Flight Telemetry Checklist -->
+        <div class="reveal-item w-full max-w-lg bg-[#0a0a0a] border border-white/[0.08] rounded-xl p-4 text-left font-mono text-xs space-y-2.5">
+          <div class="flex items-center justify-between text-neutral-300">
+            <span class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Local Edge Daemon (edge-agent.js)</span>
+            </span>
+            <span class="text-emerald-400">ONLINE (Port 8000)</span>
+          </div>
+          <div class="flex items-center justify-between text-neutral-300">
+            <span class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Hedera Consensus Topic (HCS)</span>
+            </span>
+            <span class="text-cyan-400">0.0.11335841</span>
+          </div>
+          <div class="flex items-center justify-between text-neutral-300">
+            <span class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>HTS Utility Token ($EDGE)</span>
+            </span>
+            <span class="text-amber-400">0.0.11336302</span>
+          </div>
+          <div class="flex items-center justify-between text-neutral-300">
+            <span class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Node SLA Registry Contract</span>
+            </span>
+            <span class="text-purple-400">0.0.11337652</span>
+          </div>
+        </div>
+
+        <!-- Pulsing High-Impact CTA Button -->
+        <div class="reveal-item pt-2">
+          <button id="launch-demo-btn" class="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-extrabold text-sm tracking-wide shadow-[0_0_40px_rgba(16,185,129,0.35)] hover:shadow-[0_0_60px_rgba(16,185,129,0.55)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-3">
+            <span>START 2-MINUTE LIVE PRODUCT WALKTHROUGH</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       FLOATING GLASSMORPHI CONTROL BAR (BOTTOM)
+       ========================================== -->
+  <footer class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-4xl">
+    <div class="p-3 px-5 rounded-2xl border border-white/[0.1] bg-obsidian/85 backdrop-blur-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+      
+      <!-- Slide Info & Progress Bar -->
+      <div class="flex items-center gap-4 w-full sm:w-auto">
+        <div class="flex items-baseline gap-1.5 font-bold text-white">
+          <span id="current-slide-num" class="text-emerald-400 text-sm">01</span>
+          <span class="text-neutral-500">/</span>
+          <span class="text-neutral-500 text-xs">06</span>
+        </div>
+
+        <span id="current-slide-title" class="hidden md:inline-block text-neutral-300 font-sans text-xs truncate max-w-[200px]">
+          Hero & Vision
+        </span>
+
+        <!-- 120s Pitch Deck Progress Bar -->
+        <div class="flex items-center gap-2 flex-1 sm:w-48">
+          <div class="w-full h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
+            <div id="deck-progress-bar" class="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 transition-all duration-300 ease-linear" style="width: 0%;"></div>
+          </div>
+          <span id="deck-timer" class="text-[11px] text-neutral-400 w-12 text-right">0:00</span>
+        </div>
+      </div>
+
+      <!-- Quick Slide Jump Pills -->
+      <div class="flex items-center gap-1.5" id="slide-jump-pills">
+        <button data-jump="0" class="w-6 h-6 rounded-md bg-white/[0.08] text-white flex items-center justify-center hover:bg-white/[0.15] transition-colors text-[10px]">1</button>
+        <button data-jump="1" class="w-6 h-6 rounded-md bg-white/[0.04] text-neutral-400 flex items-center justify-center hover:bg-white/[0.15] transition-colors text-[10px]">2</button>
+        <button data-jump="2" class="w-6 h-6 rounded-md bg-white/[0.04] text-neutral-400 flex items-center justify-center hover:bg-white/[0.15] transition-colors text-[10px]">3</button>
+        <button data-jump="3" class="w-6 h-6 rounded-md bg-white/[0.04] text-neutral-400 flex items-center justify-center hover:bg-white/[0.15] transition-colors text-[10px]">4</button>
+        <button data-jump="4" class="w-6 h-6 rounded-md bg-white/[0.04] text-neutral-400 flex items-center justify-center hover:bg-white/[0.15] transition-colors text-[10px]">5</button>
+        <button data-jump="5" class="w-6 h-6 rounded-md bg-white/[0.04] text-neutral-400 flex items-center justify-center hover:bg-white/[0.15] transition-colors text-[10px]">6</button>
+      </div>
+
+      <!-- Playback & Navigation Controls -->
+      <div class="flex items-center gap-2">
+        <button id="prev-btn" class="p-1.5 px-2.5 rounded-lg border border-white/[0.08] bg-white/[0.03] text-neutral-300 hover:text-white hover:border-white/[0.2] transition-all" title="Previous Slide (←)">
+          ◀
+        </button>
+
+        <button id="autoplay-toggle-btn" class="px-3 py-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-semibold hover:bg-emerald-500/20 transition-all flex items-center gap-1.5" title="Toggle Auto-Play 2:00 Pitch Deck (A)">
+          <span id="autoplay-icon">▶</span>
+          <span id="autoplay-label">Auto-Play (2:00)</span>
+        </button>
+
+        <button id="next-btn" class="p-1.5 px-2.5 rounded-lg border border-white/[0.08] bg-white/[0.03] text-neutral-300 hover:text-white hover:border-white/[0.2] transition-all" title="Next Slide (Space or →)">
+          ▶
+        </button>
+
+        <button id="fullscreen-btn" class="p-1.5 px-2 rounded-lg border border-white/[0.08] bg-white/[0.03] text-neutral-400 hover:text-white hover:border-white/[0.2] transition-all" title="Toggle Fullscreen (F)">
+          ⛶
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       LIVE DEMO LAUNCH MODAL DIALOG
+       ========================================== -->
+  <div id="demo-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-6 hidden">
+    <div class="moving-border-card max-w-xl w-full p-8 bg-neutral-950 border border-emerald-500/30 shadow-2xl space-y-6">
+      <div class="flex items-center justify-between border-b border-white/[0.08] pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold">
+            ✓
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white">Live Production Demo Handshake</h3>
+            <p class="text-xs text-neutral-400 font-mono">Hedera Testnet Environment Ready</p>
+          </div>
+        </div>
+        <button id="close-modal-btn" class="text-neutral-400 hover:text-white font-mono text-sm px-2 py-1">✕</button>
+      </div>
+
+      <div class="space-y-3 font-mono text-xs">
+        <p class="text-neutral-300 font-sans text-sm">
+          You are now entering Part B: The 2-minute live technical walkthrough. All live local node workers and Hedera testnet contracts are synced.
+        </p>
+
+        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] space-y-2">
+          <div class="text-neutral-400 font-semibold text-[11px] uppercase tracking-wider">Quick Action Targets:</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <a href="http://localhost:3000/dashboard" target="_blank" class="p-2.5 rounded-lg bg-white/[0.05] hover:bg-emerald-500/20 border border-white/[0.1] hover:border-emerald-500/40 text-white font-mono text-xs flex items-center justify-between transition-colors">
+              <span>Open Dashboard</span>
+              <span>↗</span>
+            </a>
+            <a href="https://hashscan.io/testnet/topic/0.0.11335841" target="_blank" class="p-2.5 rounded-lg bg-white/[0.05] hover:bg-cyan-500/20 border border-white/[0.1] hover:border-cyan-500/40 text-white font-mono text-xs flex items-center justify-between transition-colors">
+              <span>HashScan Topic</span>
+              <span>↗</span>
+            </a>
+            <a href="http://localhost:3000" target="_blank" class="p-2.5 rounded-lg bg-white/[0.05] hover:bg-purple-500/20 border border-white/[0.1] hover:border-purple-500/40 text-white font-mono text-xs flex items-center justify-between transition-colors">
+              <span>Main Portal</span>
+              <span>↗</span>
+            </a>
+            <button id="copy-testnet-btn" class="p-2.5 rounded-lg bg-white/[0.05] hover:bg-amber-500/20 border border-white/[0.1] hover:border-amber-500/40 text-white font-mono text-xs flex items-center justify-between transition-colors">
+              <span>Copy Node Identity</span>
+              <span id="copy-status">📋</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button id="modal-resume-btn" class="px-5 py-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.15] text-white font-mono text-xs transition-colors">
+          Return to Deck
+        </button>
+        <a href="http://localhost:3000/dashboard" target="_blank" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-mono font-bold text-xs shadow-lg hover:scale-[1.02] transition-transform">
+          Launch Live App ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       CLIENT-SIDE PRESENTATION & SOUND ENGINE
+       ========================================== -->
+  <script>
+    // Slide Metadata Configuration (Exactly 120 seconds for the pitch segment)
+    const SLIDES_CONFIG = [
+      { id: 'slide-1', title: 'Hero & Vision', durationSec: 20 },
+      { id: 'slide-2', title: 'The Core Bottleneck', durationSec: 20 },
+      { id: 'slide-3', title: '4-Layer Mesh Architecture', durationSec: 25 },
+      { id: 'slide-4', title: 'IDE Diff & Telemetry', durationSec: 25 },
+      { id: 'slide-5', title: 'Empirical Benchmarks', durationSec: 20 },
+      { id: 'slide-6', title: 'Transition to Live Demo', durationSec: 10 },
+    ];
+    const TOTAL_DECK_DURATION = 120; // 2 minutes
+
+    let currentSlideIndex = 0;
+    let isAutoPlaying = false;
+    let autoPlayTimer = null;
+    let deckElapsedTimeSec = 0;
+    let elapsedTimerInterval = null;
+    let audioFeedbackEnabled = true;
+
+    // Web Audio API Synthesizer (Zero-Latency, Native UI Audio)
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSyntheticTone(freq, type = 'sine', duration = 0.08, gainVal = 0.04) {
+      if (!audioFeedbackEnabled) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // audio might be blocked before first interaction
+      }
+    }
+
+    function playSlideWhoosh() {
+      if (!audioFeedbackEnabled) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(420, audioCtx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.035, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.15);
+      } catch (e) {}
+    }
+
+    function playSuccessChime() {
+      if (!audioFeedbackEnabled) return;
+      playSyntheticTone(523.25, 'sine', 0.12, 0.05); // C5
+      setTimeout(() => playSyntheticTone(659.25, 'sine', 0.18, 0.06), 80); // E5
+      setTimeout(() => playSyntheticTone(783.99, 'sine', 0.25, 0.07), 160); // G5
+    }
+
+    // Elements
+    const slides = document.querySelectorAll('.slide');
+    const currentSlideNumEl = document.getElementById('current-slide-num');
+    const currentSlideTitleEl = document.getElementById('current-slide-title');
+    const deckProgressBar = document.getElementById('deck-progress-bar');
+    const deckTimerEl = document.getElementById('deck-timer');
+    const autoplayBtn = document.getElementById('autoplay-toggle-btn');
+    const autoplayIcon = document.getElementById('autoplay-icon');
+    const autoplayLabel = document.getElementById('autoplay-label');
+    const jumpPills = document.querySelectorAll('#slide-jump-pills button');
+    const audioToggleBtn = document.getElementById('audio-toggle');
+    const audioTextEl = document.getElementById('audio-text');
+    const demoModal = document.getElementById('demo-modal');
+
+    // Setup Spotlight Card Math
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Setup 3D Perspective Tilt Math
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    });
+
+    // Go To Slide Function
+    function goToSlide(targetIndex) {
+      if (targetIndex < 0 || targetIndex >= slides.length) return;
+      
+      // Deactivate current slide
+      slides[currentSlideIndex].classList.remove('active');
+
+      // Update index
+      currentSlideIndex = targetIndex;
+
+      // Activate new slide
+      const activeSlide = slides[currentSlideIndex];
+      activeSlide.scrollTop = 0;
+      activeSlide.classList.add('active');
+
+      // Update UI Controls
+      currentSlideNumEl.textContent = String(currentSlideIndex + 1).padStart(2, '0');
+      currentSlideTitleEl.textContent = SLIDES_CONFIG[currentSlideIndex].title;
+
+      // Update Jump Pills
+      jumpPills.forEach((pill, idx) => {
+        if (idx === currentSlideIndex) {
+          pill.className = "w-6 h-6 rounded-md bg-white text-black font-bold flex items-center justify-center transition-colors text-[10px]";
+        } else {
+          pill.className = "w-6 h-6 rounded-md bg-white/[0.04] text-neutral-400 flex items-center justify-center hover:bg-white/[0.15] transition-colors text-[10px]";
+        }
+      });
+
+      playSlideWhoosh();
+
+      // Trigger Slide-Specific Animations & Streams
+      onSlideActivated(currentSlideIndex);
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < slides.length - 1) {
+        goToSlide(currentSlideIndex + 1);
+      } else {
+        // Reached end of presentation
+        if (isAutoPlaying) toggleAutoPlay();
+        playSuccessChime();
+        openDemoModal();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        goToSlide(currentSlideIndex - 1);
+      }
+    }
+
+    // Auto-Play Engine (Hands-Free Screen Recording)
+    function toggleAutoPlay() {
+      initAudio();
+      isAutoPlaying = !isAutoPlaying;
+
+      if (isAutoPlaying) {
+        autoplayBtn.classList.remove('border-emerald-500/30', 'bg-emerald-500/10', 'text-emerald-400');
+        autoplayBtn.classList.add('border-cyan-500/50', 'bg-cyan-500/20', 'text-cyan-300', 'shadow-[0_0_15px_rgba(6,182,212,0.3)]');
+        autoplayIcon.textContent = '⏸';
+        autoplayLabel.textContent = 'Pause Auto';
+        playSyntheticTone(880, 'sine', 0.1);
+
+        scheduleNextAutoSlide();
+        startElapsedTimer();
+      } else {
+        autoplayBtn.classList.remove('border-cyan-500/50', 'bg-cyan-500/20', 'text-cyan-300', 'shadow-[0_0_15px_rgba(6,182,212,0.3)]');
+        autoplayBtn.classList.add('border-emerald-500/30', 'bg-emerald-500/10', 'text-emerald-400');
+        autoplayIcon.textContent = '▶';
+        autoplayLabel.textContent = 'Auto-Play (2:00)';
+        clearTimeout(autoPlayTimer);
+        clearInterval(elapsedTimerInterval);
+        playSyntheticTone(440, 'sine', 0.1);
+      }
+    }
+
+    function scheduleNextAutoSlide() {
+      clearTimeout(autoPlayTimer);
+      if (!isAutoPlaying) return;
+
+      const durationMs = SLIDES_CONFIG[currentSlideIndex].durationSec * 1000;
+      autoPlayTimer = setTimeout(() => {
+        if (currentSlideIndex < slides.length - 1) {
+          nextSlide();
+          scheduleNextAutoSlide();
+        } else {
+          toggleAutoPlay();
+          openDemoModal();
+        }
+      }, durationMs);
+    }
+
+    function startElapsedTimer() {
+      clearInterval(elapsedTimerInterval);
+      elapsedTimerInterval = setInterval(() => {
+        deckElapsedTimeSec++;
+        if (deckElapsedTimeSec > TOTAL_DECK_DURATION) {
+          deckElapsedTimeSec = TOTAL_DECK_DURATION;
+        }
+
+        const pct = (deckElapsedTimeSec / TOTAL_DECK_DURATION) * 100;
+        deckProgressBar.style.width = `${pct}%`;
+
+        const mins = Math.floor(deckElapsedTimeSec / 60);
+        const secs = deckElapsedTimeSec % 60;
+        deckTimerEl.textContent = `${mins}:${String(secs).padStart(2, '0')}`;
+
+        if (deckElapsedTimeSec >= TOTAL_DECK_DURATION) {
+          clearInterval(elapsedTimerInterval);
+        }
+      }, 1000);
+    }
+
+    // Slide-Specific Execution Logic
+    let terminalInterval = null;
+    function onSlideActivated(slideIdx) {
+      // Slide 4: Start Realistic IDE Terminal Log Stream
+      if (slideIdx === 3) {
+        startTerminalTelemetryStream();
+      } else {
+        if (terminalInterval) clearInterval(terminalInterval);
+      }
+
+      // Slide 5: Number Counters & Progress Bars
+      if (slideIdx === 4) {
+        animateNumberCounters();
+      }
+    }
+
+    // Terminal Telemetry Streamer for Slide 4
+    function startTerminalTelemetryStream() {
+      const logContainer = document.getElementById('terminal-log-container');
+      if (!logContainer) return;
+
+      const logs = [
+        { time: '00:00.012', tag: '[x402:INIT]', text: 'Inbound prompt received from external agent swarm', color: 'text-neutral-400' },
+        { time: '00:00.048', tag: '[x402:CHALLENGE]', text: 'HTTP 402 Payment Required -> PayTo: 0.0.11335112 (0.05 HBAR)', color: 'text-amber-400' },
+        { time: '00:00.185', tag: '[MIRROR:TX]', text: 'TransferTransaction verified on Hedera Testnet (TxID: 0.0.11335112@171892.42)', color: 'text-emerald-400' },
+        { time: '00:00.210', tag: '[TEE:ATTEST]', text: 'Hardware attestation verified: Apple Neural Engine (M3 Max / 38 TOPS)', color: 'text-purple-400' },
+        { time: '00:00.238', tag: '[SRAM:LOAD]', text: 'Local SLM weights mapped to unified memory: qwen3-1.7b-instruct', color: 'text-cyan-400' },
+        { time: '00:00.265', tag: '[NPU:EXEC]', text: 'Inference streaming locally. Zero cloud data egress confirmed (0 Bytes).', color: 'text-emerald-400' },
+        { time: '00:00.680', tag: '[TOKEN:GEN]', text: 'Emitted 72 tokens @ 38.4 tokens/sec. Latency: 480ms', color: 'text-white' },
+        { time: '00:00.820', tag: '[HCS-10:COMMIT]', text: 'Submitting SHA-256 state proof to Topic 0.0.11335841 (Seq #4829)...', color: 'text-purple-400' },
+        { time: '00:00.990', tag: '[CONSENSUS:OK]', text: 'Consensus timestamp 1718924829.401 notarized. 0 Bytes cloud egress.', color: 'text-emerald-400 font-bold' },
+        { time: '00:01.010', tag: '[PAYOUT:HTS]', text: 'Node Kai credited +0.05 $EDGE reward (Token: 0.0.11336302)', color: 'text-amber-300' }
+      ];
+
+      logContainer.innerHTML = '';
+      let logIndex = 0;
+
+      if (terminalInterval) clearInterval(terminalInterval);
+      terminalInterval = setInterval(() => {
+        if (logIndex < logs.length) {
+          const item = logs[logIndex];
+          const div = document.createElement('div');
+          div.className = `flex items-baseline gap-2 leading-relaxed ${item.color}`;
+          div.innerHTML = `
+            <span class="text-neutral-500 text-[10px] select-none">${item.time}</span>
+            <span class="font-bold">${item.tag}</span>
+            <span class="text-neutral-300 truncate">${item.text}</span>
+          `;
+          logContainer.appendChild(div);
+          logContainer.scrollTop = logContainer.scrollHeight;
+          playSyntheticTone(1200 + logIndex * 40, 'sine', 0.02, 0.015);
+          logIndex++;
+        } else {
+          clearInterval(terminalInterval);
+        }
+      }, 240);
+    }
+
+    // Number Counter Animation for Slide 5
+    function animateNumberCounters() {
+      const counters = document.querySelectorAll('.counter-target');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-value'));
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const duration = 1200;
+        const startTime = performance.now();
+
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cubic curve
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const currentVal = target * easeOut;
+
+          if (target % 1 === 0) {
+            counter.textContent = Math.round(currentVal) + suffix;
+          } else {
+            counter.textContent = currentVal.toFixed(1) + suffix;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          }
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    // Modal Control
+    function openDemoModal() {
+      demoModal.classList.remove('hidden');
+      playSuccessChime();
+    }
+    function closeDemoModal() {
+      demoModal.classList.add('hidden');
+    }
+
+    // Event Listeners
+    document.getElementById('next-btn').addEventListener('click', () => { initAudio(); nextSlide(); });
+    document.getElementById('prev-btn').addEventListener('click', () => { initAudio(); prevSlide(); });
+    autoplayBtn.addEventListener('click', toggleAutoPlay);
+    document.getElementById('launch-demo-btn').addEventListener('click', () => { initAudio(); openDemoModal(); });
+    document.getElementById('close-modal-btn').addEventListener('click', closeDemoModal);
+    document.getElementById('modal-resume-btn').addEventListener('click', closeDemoModal);
+
+    // Jump Pills
+    jumpPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        initAudio();
+        const target = parseInt(pill.getAttribute('data-jump'));
+        goToSlide(target);
+      });
+    });
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      initAudio();
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'a') {
+        toggleAutoPlay();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      } else if (e.key.toLowerCase() === 'm') {
+        toggleAudio();
+      } else if (e.key === 'Escape') {
+        closeDemoModal();
+      }
+    });
+
+    // Audio SFX Toggle
+    function toggleAudio() {
+      audioFeedbackEnabled = !audioFeedbackEnabled;
+      if (audioFeedbackEnabled) {
+        audioTextEl.textContent = 'SFX';
+        document.getElementById('audio-icon-on').classList.remove('text-neutral-500');
+        document.getElementById('audio-icon-on').classList.add('text-emerald-400');
+        playSyntheticTone(700, 'sine', 0.1);
+      } else {
+        audioTextEl.textContent = 'MUTED';
+        document.getElementById('audio-icon-on').classList.remove('text-emerald-400');
+        document.getElementById('audio-icon-on').classList.add('text-neutral-500');
+      }
+    }
+    audioToggleBtn.addEventListener('click', toggleAudio);
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+    document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+
+    // Copy Node Identity Helper
+    document.getElementById('copy-testnet-btn').addEventListener('click', () => {
+      const nodeIdentity = {
+        name: "node-kai-01",
+        account: "0.0.11335112",
+        hcsTopic: "0.0.11335841",
+        tokenEdge: "0.0.11336302",
+        nftSerial: "0.0.11336303/1",
+        contractSLA: "0.0.11337652",
+        hardware: "Apple M3 Max NPU (38 TOPS)",
+        zeroEgress: true
+      };
+      navigator.clipboard.writeText(JSON.stringify(nodeIdentity, null, 2));
+      document.getElementById('copy-status').textContent = 'COPIED!';
+      playSyntheticTone(900, 'sine', 0.08);
+      setTimeout(() => {
+        document.getElementById('copy-status').textContent = '📋';
+      }, 2000);
+    });
+
+    // Initialize View
+    goToSlide(0);
+  </script>
+</body>
+</html>
