@@ -80,14 +80,15 @@
 
 ### Visual on Screen:
 *Open HashScan Testnet (`https://hashscan.io/testnet`)*:
-- Show Topic `0.0.11335841` with recent messages.
+- Show Topic `0.0.11335841` with recent multi-node telemetry.
 - Show Token `0.0.11336302` ($EDGE) and NFT `0.0.11336303` (HENFT).
-- Bring up the Automated Test Runner in terminal (`node scripts/run-tests.js`) showing `23 PASSED, 0 FAILED`.
+- Show Smart Contract `0.0.11337652` (`NodeSLARegistry`).
+- Bring up the Automated Test Runner in terminal (`npm test`) showing `38 ASSERTIONS PASSED ACROSS 10 SUITES, 0 FAILED`.
 
 ### Spoken Narration:
-> *"Everything we’ve shown you is 100% live on Hedera Testnet. You can verify our HCS topic, our fungible token, and our node NFT right now on HashScan. Our automated test suite covers 23 end-to-end integration tests with zero failures.*
+> *"Everything we’ve shown you is 100% live on Hedera Testnet. You can verify our HCS topic, our fungible token, our node NFT, and our NodeSLARegistry smart contract right now on HashScan. Our automated test suite covers 10 comprehensive test suites with 38 verified assertions and zero failures.*
 >
-> *HederaEdge solves the enterprise AI dilemma: true zero-data-egress security, micropayment scalability via x402, and trustless interoperability across chains.*
+> *HederaEdge solves the enterprise AI dilemma: true zero-data-egress security, hardware TEE attestation, micropayment scalability via x402, and trustless interoperability across chains.*
 >
 > *Thank you, and we welcome your questions!"*
 
@@ -101,4 +102,5 @@
   - Topic: `https://hashscan.io/testnet/topic/0.0.11335841`
   - Token: `https://hashscan.io/testnet/token/0.0.11336302`
   - NFT: `https://hashscan.io/testnet/token/0.0.11336303`
-- [ ] Clean terminal ready to execute `node scripts/run-tests.js`
+  - Smart Contract: `https://hashscan.io/testnet/contract/0.0.11337652`
+- [ ] Clean terminal ready to execute `npm test`

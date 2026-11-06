@@ -48,6 +48,7 @@ Hedera provides the ideal foundation:
 | **Hedera Consensus Service (HCS)** | **Topic: `0.0.11335841`**<br/>Memo: *"HederaEdge Telemetry & HCS-10"* | Logs cryptographic proof of inference (PoI), SHA-256 running hashes, response latency, and node identity for immutable auditing. |
 | **Hedera Token Service (HTS - Fungible)** | **Token ID: `0.0.11336302`**<br/>Symbol: **`$EDGE`** | Native DePIN compute token used for node operator rewards, inference billing, and SLA security staking. |
 | **Hedera Token Service (HTS - NFT)** | **Token ID: `0.0.11336303`**<br/>Collection: **`HENFT`** (Serial #1) | Tokenized Node Hardware & Security License encoding hardware tier (45 TOPS NPU), memory, and verified zero-egress status. |
+| **Hedera Smart Contract Service (HSCS)** | **Contract ID: `0.0.11337652`**<br/>Contract: `NodeSLARegistry` | On-chain SLA staking, node reputation registry, and automated collateral slashing for rogue nodes. |
 | **Hedera Crypto Transfers** | **Account: `0.0.11335112`** | Automated native $HBAR reward payouts and x402 settlement using `TransferTransaction`. |
 
 ### Cross-Chain Interoperability Architecture
