@@ -11,6 +11,7 @@ import {
   Radio,
   Server,
   ShieldCheck,
+  Smartphone,
   Terminal,
   Zap,
 } from "lucide-react";
@@ -55,6 +56,9 @@ export default function Home() {
             <button onClick={handleOpenDashboard} className="hover:text-white transition-colors">
               Node Telemetry
             </button>
+            <Link href="/mobile" className="hover:text-emerald-300 text-emerald-400 font-semibold transition-colors flex items-center gap-1">
+              <Smartphone className="w-3.5 h-3.5" /> Mobile Miner
+            </Link>
             <button onClick={handleLaunchAgent} className="hover:text-white transition-colors">
               Agent Portal
             </button>
@@ -119,6 +123,15 @@ export default function Home() {
               <ArrowRight className="w-4 h-4 text-neutral-300" />
             </span>
           </button>
+
+          {/* Mobile Miner Button */}
+          <Link
+            href="/mobile"
+            className="h-12 px-6 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-sm font-semibold text-emerald-300 transition-all flex items-center gap-2 shadow-lg shadow-emerald-950/40"
+          >
+            <Smartphone className="w-4 h-4 text-emerald-400" />
+            <span>Mobile Miner View</span>
+          </Link>
 
           {/* Secondary Glass Button */}
           <button

@@ -19,12 +19,13 @@ export async function middleware(request: NextRequest) {
     const hostname = request.headers.get('host') || ''
     const url = request.nextUrl
     
-    // Ignore static files, internal database APIs, telemetry, dashboard, Next.js internal files
+    // Ignore static files, internal database APIs, telemetry, dashboard, mobile, Next.js internal files
     if (
       url.pathname.startsWith('/_next') ||
       url.pathname.startsWith('/api') ||
       url.pathname.startsWith('/agent') ||
       url.pathname.startsWith('/dashboard') ||
+      url.pathname.startsWith('/mobile') ||
       url.pathname.startsWith('/fonts') ||
       url.pathname.startsWith('/favicon.ico') ||
       url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|otf|ttf)$/)

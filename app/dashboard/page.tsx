@@ -14,6 +14,7 @@ import {
   RefreshCw,
   Send,
   ShieldCheck,
+  Smartphone,
   Sparkles,
   Terminal,
   Wallet,
@@ -180,6 +181,13 @@ export default function DashboardPage() {
           </div>
 
           <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+            <Link
+              href="/mobile"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-xs font-semibold text-emerald-300 transition-all shadow-md shadow-emerald-950/40"
+            >
+              <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
+              Mobile Node Miner
+            </Link>
             <button
               onClick={fetchTelemetry}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.05] border border-white/[0.1] hover:bg-white/[0.1] text-xs font-semibold text-neutral-200 transition-all"
