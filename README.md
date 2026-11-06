@@ -3,6 +3,9 @@
 > **Decentralized Physical Edge AI (DePIN) & Verifiable Security Gateway on Hedera**  
 > *Zero-Data-Egress Intelligence • HTS Tokenization • HSCS SLA Staking • x402 Micropayments*
 
+[![Vercel Live](https://img.shields.io/badge/Vercel-Live%20Production-black?style=flat-square&logo=vercel)](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app)
+[![Pitch Deck](https://img.shields.io/badge/Interactive%20Deck-Aceternity%20UI-cyan?style=flat-square)](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/deck.html)
+[![Video Screening Room](https://img.shields.io/badge/Demo%20Screening-4%20Min%20Master-purple?style=flat-square)](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/video-preview.html)
 [![Hedera Testnet](https://img.shields.io/badge/Hedera-Testnet%20Live-emerald?style=flat-square)](https://hashscan.io/testnet)
 [![HCS Topic](https://img.shields.io/badge/HCS%20Topic-0.0.11335841-cyan?style=flat-square)](https://hashscan.io/testnet/topic/0.0.11335841)
 [![HTS Token](https://img.shields.io/badge/HTS%20Token-0.0.11336302%20($EDGE)-amber?style=flat-square)](https://hashscan.io/testnet/token/0.0.11336302)
@@ -10,7 +13,15 @@
 [![HSCS Contract](https://img.shields.io/badge/HSCS%20Contract-0.0.11337652-blue?style=flat-square)](https://hashscan.io/testnet/contract/0.0.11337652)
 [![Automated Tests](https://img.shields.io/badge/Tests-38%20Passed%20%2F%2010%20Suites-brightgreen?style=flat-square)](scripts/run-tests.js)
 
-For the complete judging specification and business model canvas, read the [**HACKATHON-PRD.md**](HACKATHON-PRD.md). For recorded demonstration timing and talking points, read [**DEMO-VIDEO-SCRIPT.md**](DEMO-VIDEO-SCRIPT.md).
+### 🌐 Live Production Links
+* **Live Vercel Application:** [https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app)
+* **Interactive Pitch Deck (60fps Aceternity UI):** [https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/deck.html](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/deck.html)
+* **4-Minute Demo Screening Room:** [https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/video-preview.html](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/video-preview.html)
+* **Live Technical Demo Simulator:** [https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/demo-live.html](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/demo-live.html)
+* **Operator Telemetry Dashboard:** [https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/dashboard](https://franky-agent-router-main-ouegb9or5-mugunth007s-projects.vercel.app/dashboard)
+* **GitHub Repository:** [https://github.com/Mugunth007/hedera-edge-router](https://github.com/Mugunth007/hedera-edge-router)
+
+For the complete judging specification and business model canvas, read the [**HACKATHON-PRD.md**](HACKATHON-PRD.md). For recorded demonstration timing and talking points, read [**4-MINUTE-DEMO-RUNBOOK.md**](4-MINUTE-DEMO-RUNBOOK.md).
 
 ---
 
