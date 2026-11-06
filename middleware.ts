@@ -26,17 +26,24 @@ export async function middleware(request: NextRequest) {
       url.pathname.startsWith('/agent') ||
       url.pathname.startsWith('/dashboard') ||
       url.pathname.startsWith('/mobile') ||
+      url.pathname.startsWith('/deck') ||
+      url.pathname.startsWith('/video') ||
+      url.pathname.startsWith('/preview') ||
+      url.pathname.startsWith('/demo') ||
       url.pathname.startsWith('/fonts') ||
       url.pathname.startsWith('/favicon.ico') ||
-      url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|otf|ttf)$/)
+      url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|otf|ttf|html|mp4|json)$/)
     ) {
       return NextResponse.next()
     }
 
     // Check if we're on the main root domain without subdomain
+    const isVercelRoot = hostname.endsWith('.vercel.app') && hostname.split('.').length <= 4 && !hostname.includes('.localhost')
     if (
       hostname === 'hederaedge.xyz' ||
       hostname === 'www.hederaedge.xyz' ||
+      hostname === 'franky-agent-router-main.vercel.app' ||
+      hostname.includes('franky-agent-router-main') ||
       hostname === 'localhost:3000' ||
       hostname === '127.0.0.1:3000' ||
       hostname === 'localhost' ||
